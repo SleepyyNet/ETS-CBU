@@ -1,6 +1,6 @@
 '''
     ETS-CBU is a program to manage ETS2 and ATS controller layouts.
-    Copyright (C) 2017 codemicro
+    Copyright (C) 2017 Thomas Pain
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
     and I'll do my best to respond in a timely manner.
 '''
 
-print("ETS-CBU v0.1 alpha Copyright (C) 2017 codemicro")
+print("ETS-CBU v0.1 alpha Copyright (C) 2017  Thomas Pain")
 print("This program comes with ABSOLUTELY NO WARRANTY.")
 print("This is free software, and you are welcome to redistribute it")
 print("under certain conditions; see LICENCE.txt for details.")
@@ -80,8 +80,16 @@ if userfunction == "SWAP" or "swap" or "Swap":
     contofprof = os.listdir(profdir)
     copyfiles = []
 
+    endfileext = ""
+
+    if "controls.sii.etcbu1" in contofprof:
+        endfileext = ".etcbu2"
+    elif "controls.sii.etcbu2" in contofprof:
+        endfileext = ".etcbu1"
+
     #checking to see if there are any prexisting .etcbu files
     genfilecount = 0
+    '''
     for i in range(0, len(contofprof)):    
         if genfiles[genfilecount] in contofprof:
             print("There are already alternative files in this directory!")
@@ -89,7 +97,7 @@ if userfunction == "SWAP" or "swap" or "Swap":
             time.sleep(3)
             sys.exit()
         genfilecount = genfilecount + 1
-        
+    '''    
     #indexing original control files
     if files[0] in contofprof:
         copyfiles.append(files[0])
@@ -120,7 +128,7 @@ if userfunction == "SWAP" or "swap" or "Swap":
     if input(" > ") == "y":
         for i in range(0, filelen):
             print(filenumber)
-            os.rename(profdir + files[filenumber], profdir + files[filenumber] + ".etcbu")
+            os.rename(profdir + files[filenumber], profdir + files[filenumber] + endfileext)
             filenumber = filenumber + 1
     else:
         sys.exit()
