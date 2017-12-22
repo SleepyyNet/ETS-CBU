@@ -1,10 +1,10 @@
 ETS-CBU documentation
 =====================
 
-Another simple header
-=====================
+This is completely and utterly NOT FINISHED, or ready to be used.
+=================================================================
 
-This be some text explaining something that could possibly be semi-important.::
+This be some text explaining something that could possibly be semi-important.:
 
 	print("hello")
 	>> hello
@@ -14,9 +14,10 @@ Guide
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
-
+	
+   basic functions
    licence
    contact
 
