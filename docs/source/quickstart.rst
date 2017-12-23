@@ -1,6 +1,22 @@
 Quickstart
 ===============
 
+Please first read the requirements!
+
+When you first start the script, you will be asked for the name of the user account
+::
+   Please input the username for the target account.
+    >
+
+This is the name of the user folder found at C:\\Users\\. For example, C:\\Users\\Joe would be
+::
+   Please input the username for the target account.
+    > Joe
+
+You will then be asked to select the profile that you want to perform the functions in. For sync, this will be the profile that you want to synchronise from.
+	
+After that, you will be presented with a command line style interface. At present there is not a help command, you will have to look at the commands section of the documentation.
+	
 At present, there are only three functions built into the script. They are:
 
 * Swap

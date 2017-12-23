@@ -45,7 +45,7 @@ dirs = os.listdir(directory)
 #print(dirs)
 dirlen = len(dirs)
 files = ["controls.sii", "gearbox_layout_scania_12.sii", "gearbox_layout_scania_12_2.sii", "gearbox_layout_volvo_12.sii", "gearbox_layout_volvo_12_2.sii", "gearbox_layout_zf_12.sii", "gearbox_layout_zf_16.sii", "gearbox_range.sii", "gearbox_range_splitter.sii", "gearbox_splitter.sii"]
-genfiles = ["controls.sii.etcbu1", "gearbox_layout_scania_12.sii.etcbu1", "gearbox_layout_12_2.sii.etcbu1", "gearbox_layout_volvo_12.sii.etcbu1", "gearbox_layout_volvo_12_2.sii.etcbu1", "gearbox_layout_zf_12.sii.etcbu1", "gearbox_layout_zf_16.sii.etcbu1", "gearbox_range.sii.etcbu1", "gearbox_range_splitter.sii.etcbu1", "gearbox_splitter.sii.etcbu1", "controls.sii.etcbu2", "gearbox_layout_scania_12.sii.etcbu2", "gearbox_layout_12_2.sii.etcbu2", "gearbox_layout_volvo_12.sii.etcbu2", "gearbox_layout_volvo_12_2.sii.etcbu2", "gearbox_layout_zf_12.sii.etcbu2", "gearbox_layout_zf_16.sii.etcbu2", "gearbox_range.sii.etcbu2", "gearbox_range_splitter.sii.etcbu2", "gearbox_splitter.sii.etcbu2"]
+genfiles = ["controls.sii.etcbu1", "gearbox_layout_scania_12.sii.etcbu1", "gearbox_layout_scania_12_2.sii.etcbu1", "gearbox_layout_volvo_12.sii.etcbu1", "gearbox_layout_volvo_12_2.sii.etcbu1", "gearbox_layout_zf_12.sii.etcbu1", "gearbox_layout_zf_16.sii.etcbu1", "gearbox_range.sii.etcbu1", "gearbox_range_splitter.sii.etcbu1", "gearbox_splitter.sii.etcbu1", "controls.sii.etcbu2", "gearbox_layout_scania_12.sii.etcbu2", "gearbox_layout_12_2.sii.etcbu2", "gearbox_layout_volvo_12.sii.etcbu2", "gearbox_layout_volvo_12_2.sii.etcbu2", "gearbox_layout_zf_12.sii.etcbu2", "gearbox_layout_zf_16.sii.etcbu2", "gearbox_range.sii.etcbu2", "gearbox_range_splitter.sii.etcbu2", "gearbox_splitter.sii.etcbu2"]
 #bytearray.fromhex("7061756c").decode()
 #shutil.move('test.txt', 'newtest.txt')
 
@@ -70,50 +70,74 @@ profdir = directory + profilepath + "/"
 # asking the user what function to do
 
 def swapinit():
-    global contofprof, directory, profilepath, profdir
+    global contofprof, directory, profilepath, profdir, genfiles, files
     #print(profdir)
     contofprof = os.listdir(profdir)
     copyfiles = []
+    newcopyfiles = []
 
     endfileext = ""
-
+    """
     if "controls.sii.etcbu1" in contofprof:
         endfileext = ".etcbu2"
     elif "controls.sii.etcbu2" in contofprof:
         endfileext = ".etcbu1"
+    else:
+        endfileext = ".etcbu1"
+    """
+    endfileext = ".etcbu2"
     
-    if files[0] in contofprof:
-        copyfiles.append(files[0])
-    if files[1] in contofprof:
-        copyfiles.append(files[1])
-    if files[2] in contofprof:
-        copyfiles.append(files[2])
-    if files[3] in contofprof:
-        copyfiles.append(files[3])
-    if files[4] in contofprof:
-        copyfiles.append(files[4])
-    if files[5] in contofprof:
-        copyfiles.append(files[5])
-    if files[6] in contofprof:
-        copyfiles.append(files[6])
-    if files[7] in contofprof:
-        copyfiles.append(files[7])
-    if files[8] in contofprof:
-        copyfiles.append(files[8])
-    if files[9] in contofprof:
-        copyfiles.append(files[9])
+    print(endfileext)
 
-    #print(copyfiles)
-    #input()
-    #print(files)
+    if endfileext == ".etcbu2":
+        print("The var thingy works")
+        vz = 10
+        vo = 11
+        vt = 12
+        vth = 13
+        vf = 14
+        vfi = 15
+        vs = 16
+        vse = 17
+        ve = 18
+        vn = 19
+
+    #currently doesnt work
     
-    filelen = len(copyfiles)
+    if genfiles[vz] in contofprof:
+        newcopyfiles.append(files[0])
+    if genfiles[vo] in contofprof:
+        newcopyfiles.append(files[1])
+    if genfiles[vt] in contofprof:
+        newcopyfiles.append(files[2])
+    if genfiles[vth] in contofprof:
+        newcopyfiles.append(files[3])
+    if genfiles[vf] in contofprof:
+        newcopyfiles.append(files[4])
+    if genfiles[vfi] in contofprof:
+        newcopyfiles.append(files[5])
+    if genfiles[vs] in contofprof:
+        newcopyfiles.append(files[6])
+    if genfiles[vse] in contofprof:
+        newcopyfiles.append(files[7])
+    if genfiles[ve] in contofprof:
+        newcopyfiles.append(files[8])
+    if genfiles[vn] in contofprof:
+        newcopyfiles.append(files[9])
+
+    print(newcopyfiles)
+    input()
+    
+    filelen = len(newcopyfiles)
+    if filelen == 0:
+        print("There are no regular .sii files in this directory!")
+        return
+    
     filenumber = 0
     
-    print("Would you like to begin initiating the swap function? y/n")
+    print("Would you like to begin initiating the swap copy function? y/n")
     if input(" > ") == "y":
         for i in range(0, filelen):
-            print(filenumber)
             os.rename(profdir + files[filenumber], profdir + files[filenumber] + endfileext)
             filenumber = filenumber + 1
 
@@ -157,11 +181,15 @@ def swapinitc():
     if files[9] in contofprof:
         copyfiles.append(files[9])
 
-    print(copyfiles)
+    print("oldcopyfiles", copyfiles)
     input()
     #print(files)
     
     filelen = len(copyfiles)
+    if filelen == 0:
+        print("There are no regular .sii files in this directory!")
+        return
+    
     filenumber = 0
     
     print("Would you like to begin initiating the swap copy function? y/n")
@@ -193,7 +221,7 @@ def swapinitc():
         if genfiles[9] in contofprof:
             newcopyfiles.append(genfiles[9])
 
-        print(newcopyfiles)
+        print("newcopyfiles", newcopyfiles)
         input()
 
         newfilelen = len(newcopyfiles)
@@ -201,7 +229,7 @@ def swapinitc():
 
         for i in range(0, filelen):
             #print(filenumber)
-            shutil.copy2(profdir + genfiles[filenumber] + endfileext, profdir + files[filenumber] + ".sii")
+            shutil.copy2(profdir + genfiles[filenumber], profdir + files[filenumber] + ".sii")
             filenumber = filenumber + 1
 
 def swap():
@@ -260,6 +288,8 @@ def swap():
             print(filenumber)
             os.rename(profdir + files[filenumber], profdir + files[filenumber] + endfileext)
             filenumber = filenumber + 1
+
+print()
 print("Please input command for the profile " + bytearray.fromhex(dirs[userin]).decode() + "?")
 while True:
     userfunction = input(">> ")
