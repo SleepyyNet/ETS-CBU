@@ -1,6 +1,6 @@
 '''
-    ETS-CBU is a program to manage ETS2 and ATS controller layouts.
-    Copyright (C) 2017 codemicro
+    ETS-CBU is a program to manage ETS2 controller layouts.
+    Copyright (C) 2018 codemicro
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,39 +20,34 @@
     and I'll do my best to respond in a timely manner.
 '''
 
-print("ETS-CBU v0.1 alpha Copyright (C) 2017  codemicro")
+version = "0.0a"
+
+print("ETS-CBU v0.0 alpha Copyright (C) 2018 codemicro")
 print("This program comes with ABSOLUTELY NO WARRANTY.")
 print("This is free software, and you are welcome to redistribute it")
 print("under certain conditions; see LICENCE.txt for details.")
 print()
 print()
 
-import os
-import shutil
-import sys
-import time
+import os, shutil, sys, time, zipfile #, win32con, win32api # stock libraries
+import easygui # included libraries
+import confgen # custom libraries
 
-# ***********************************************************************************
-# sorting out all the vars
+# gathering required data
 
-print("Please input the username for the target account (see information.pdf or readme.md for info).")
-username = input(" > ")
-directory = "C:/Users/" + username + "/Documents/Euro Truck Simulator 2/profiles/"
-#print(directory)
+print("Please locate your ETS2 folder.")
+directory = easygui.diropenbox() + "\\"
+print(directory)
+
+files = ["controls.sii", "gearbox_layout_scania_12.sii", "gearbox_layout_scania_12_2.sii", "gearbox_layout_volvo_12.sii", "gearbox_layout_volvo_12_2.sii", "gearbox_layout_zf_12.sii", "gearbox_layout_zf_16.sii", "gearbox_range.sii", "gearbox_range_splitter.sii", "gearbox_splitter.sii"]
+
+# choosing a profile
+
 dirnumber = 0
 listnumber = 1
-dirs = os.listdir(directory)
-#print(dirs)
+dirs = os.listdir(directory + "\\profiles\\")
 dirlen = len(dirs)
-files = ["controls.sii", "gearbox_layout_scania_12.sii", "gearbox_layout_scania_12_2.sii", "gearbox_layout_volvo_12.sii", "gearbox_layout_volvo_12_2.sii", "gearbox_layout_zf_12.sii", "gearbox_layout_zf_16.sii", "gearbox_range.sii", "gearbox_range_splitter.sii", "gearbox_splitter.sii"]
-genfiles = ["controls.sii.etcbu1", "gearbox_layout_scania_12.sii.etcbu1", "gearbox_layout_scania_12_2.sii.etcbu1", "gearbox_layout_volvo_12.sii.etcbu1", "gearbox_layout_volvo_12_2.sii.etcbu1", "gearbox_layout_zf_12.sii.etcbu1", "gearbox_layout_zf_16.sii.etcbu1", "gearbox_range.sii.etcbu1", "gearbox_range_splitter.sii.etcbu1", "gearbox_splitter.sii.etcbu1", "controls.sii.etcbu2", "gearbox_layout_scania_12.sii.etcbu2", "gearbox_layout_12_2.sii.etcbu2", "gearbox_layout_volvo_12.sii.etcbu2", "gearbox_layout_volvo_12_2.sii.etcbu2", "gearbox_layout_zf_12.sii.etcbu2", "gearbox_layout_zf_16.sii.etcbu2", "gearbox_range.sii.etcbu2", "gearbox_range_splitter.sii.etcbu2", "gearbox_splitter.sii.etcbu2"]
-#bytearray.fromhex("7061756c").decode()
-#shutil.move('test.txt', 'newtest.txt')
-
-# ***********************************************************************************
-# asking the user what profile to use
-
-print("Please pick a folder to swap the controller configs.")
+print("Please pick a folder to change the controller configs.")
 for i in range(0, dirlen):
     profilename = bytearray.fromhex(dirs[dirnumber]).decode()
     print(listnumber, ": ", profilename)
@@ -63,247 +58,75 @@ userin = input(" > ")
 userin = int(userin)
 userin = userin - 1
 profilepath = dirs[userin]
-profdir = directory + profilepath + "/"
-#print(bytearray.fromhex(dirs[userin]).decode())
+profdir = directory + "profiles\\" + profilepath + "\\"
+os.chdir(profdir)
+profcont = os.listdir(profdir)
+proflen = len(profcont)
+filelen = len(files)
 
-# ***********************************************************************************
-# asking the user what function to do
-
-def swapinit():
-    global contofprof, directory, profilepath, profdir, genfiles, files
-    #print(profdir)
-    contofprof = os.listdir(profdir)
-    copyfiles = []
-    newcopyfiles = []
-
-    endfileext = ""
-    """
-    if "controls.sii.etcbu1" in contofprof:
-        endfileext = ".etcbu2"
-    elif "controls.sii.etcbu2" in contofprof:
-        endfileext = ".etcbu1"
-    else:
-        endfileext = ".etcbu1"
-    """
-    endfileext = ".etcbu2"
+# swap
+## create
+def swapcreate():
+    global profilepath, profdir
     
-    print(endfileext)
-
-    if endfileext == ".etcbu2":
-        print("The var thingy works")
-        vz = 10
-        vo = 11
-        vt = 12
-        vth = 13
-        vf = 14
-        vfi = 15
-        vs = 16
-        vse = 17
-        ve = 18
-        vn = 19
-
-    #currently doesnt work
-    
-    if genfiles[vz] in contofprof:
-        newcopyfiles.append(files[0])
-    if genfiles[vo] in contofprof:
-        newcopyfiles.append(files[1])
-    if genfiles[vt] in contofprof:
-        newcopyfiles.append(files[2])
-    if genfiles[vth] in contofprof:
-        newcopyfiles.append(files[3])
-    if genfiles[vf] in contofprof:
-        newcopyfiles.append(files[4])
-    if genfiles[vfi] in contofprof:
-        newcopyfiles.append(files[5])
-    if genfiles[vs] in contofprof:
-        newcopyfiles.append(files[6])
-    if genfiles[vse] in contofprof:
-        newcopyfiles.append(files[7])
-    if genfiles[ve] in contofprof:
-        newcopyfiles.append(files[8])
-    if genfiles[vn] in contofprof:
-        newcopyfiles.append(files[9])
-
-    print(newcopyfiles)
-    input()
-    
-    filelen = len(newcopyfiles)
-    if filelen == 0:
-        print("There are no regular .sii files in this directory!")
-        return
-    
-    filenumber = 0
-    
-    print("Would you like to begin initiating the swap copy function? y/n")
-    if input(" > ") == "y":
-        for i in range(0, filelen):
-            os.rename(profdir + files[filenumber], profdir + files[filenumber] + endfileext)
-            filenumber = filenumber + 1
-
-def swapinitc():
-    global contofprof, directory, profilepath, profdir, genfiles, files
-    #print(profdir)
-    contofprof = os.listdir(profdir)
-    copyfiles = []
-    newcopyfiles = []
-
-    endfileext = ""
-
-    if "controls.sii.etcbu1" in contofprof:
-        endfileext = ".etcbu2"
-    elif "controls.sii.etcbu2" in contofprof:
-        endfileext = ".etcbu1"
-    else:
-        endfileext = ".etcbu1"
-
-    print(endfileext)
-    input()
-    
-    if files[0] in contofprof:
-        copyfiles.append(files[0])
-    if files[1] in contofprof:
-        copyfiles.append(files[1])
-    if files[2] in contofprof:
-        copyfiles.append(files[2])
-    if files[3] in contofprof:
-        copyfiles.append(files[3])
-    if files[4] in contofprof:
-        copyfiles.append(files[4])
-    if files[5] in contofprof:
-        copyfiles.append(files[5])
-    if files[6] in contofprof:
-        copyfiles.append(files[6])
-    if files[7] in contofprof:
-        copyfiles.append(files[7])
-    if files[8] in contofprof:
-        copyfiles.append(files[8])
-    if files[9] in contofprof:
-        copyfiles.append(files[9])
-
-    print("oldcopyfiles", copyfiles)
-    input()
-    #print(files)
-    
-    filelen = len(copyfiles)
-    if filelen == 0:
-        print("There are no regular .sii files in this directory!")
-        return
-    
-    filenumber = 0
-    
-    print("Would you like to begin initiating the swap copy function? y/n")
-    if input(" > ") == "y":
-        for i in range(0, filelen):
-            #print(filenumber)
-            os.rename(profdir + files[filenumber], profdir + files[filenumber] + endfileext)
-            filenumber = filenumber + 1
-        contofprof = os.listdir(profdir)
-        
-        if genfiles[0] in contofprof:
-            newcopyfiles.append(genfiles[0])
-        if genfiles[1] in contofprof:
-            newcopyfiles.append(genfiles[1])
-        if genfiles[2] in contofprof:
-            newcopyfiles.append(genfiles[2])
-        if genfiles[3] in contofprof:
-            newcopyfiles.append(genfiles[3])
-        if genfiles[4] in contofprof:
-            newcopyfiles.append(genfiles[4])
-        if genfiles[5] in contofprof:
-            newcopyfiles.append(genfiles[5])
-        if genfiles[6] in contofprof:
-            newcopyfiles.append(genfiles[6])
-        if genfiles[7] in contofprof:
-            newcopyfiles.append(genfiles[7])
-        if genfiles[8] in contofprof:
-            newcopyfiles.append(genfiles[8])
-        if genfiles[9] in contofprof:
-            newcopyfiles.append(genfiles[9])
-
-        print("newcopyfiles", newcopyfiles)
-        input()
-
-        newfilelen = len(newcopyfiles)
-        filenumber = 0
-
-        for i in range(0, filelen):
-            #print(filenumber)
-            shutil.copy2(profdir + genfiles[filenumber], profdir + files[filenumber] + ".sii")
-            filenumber = filenumber + 1
-
-def swap():
-    global contofprof, directory, profilepath, profdir
-    #print(profdir)
-    contofprof = os.listdir(profdir)
     copyfiles = []
 
-    endfileext = ""
+    stage = 0
+    for i in range(0, filelen): # making a variable saying what there is in that profile
+        if files[stage] in profcont:
+            copyfiles.append(files[stage])
+            stage = stage + 1
 
-    if "controls.sii.etcbu1" in contofprof:
-        endfileext = ".etcbu2"
-    elif "controls.sii.etcbu2" in contofprof:
-        endfileext = ".etcbu1"
+    if os.path.exists(directory + "\\etscbu.backups") == False: # if it isn't aready there, make it and make it hidden
+        os.makedirs(directory + "\\etscbu.backups")
+        #win32api.SetFileAttributes(directory + "\\etscbu.backups", win32con.FILE_ATTRIBUTE_HIDDEN)
 
-    #checking to see if there are any prexisting .etcbu files
-    genfilecount = 0
-    '''
-    for i in range(0, len(contofprof)):    
-        if genfiles[genfilecount] in contofprof:
-            print("There are already alternative files in this directory!")
-            print("Aborting script in three seconds.")
-            time.sleep(3)
-            sys.exit()
-        genfilecount = genfilecount + 1
-    '''    
-    #indexing original control files
-    if files[0] in contofprof:
-        copyfiles.append(files[0])
-    if files[1] in contofprof:
-        copyfiles.append(files[1])
-    if files[2] in contofprof:
-        copyfiles.append(files[2])
-    if files[3] in contofprof:
-        copyfiles.append(files[3])
-    if files[4] in contofprof:
-        copyfiles.append(files[4])
-    if files[5] in contofprof:
-        copyfiles.append(files[5])
-    if files[6] in contofprof:
-        copyfiles.append(files[6])
-    if files[7] in contofprof:
-        copyfiles.append(files[7])
-    if files[8] in contofprof:
-        copyfiles.append(files[8])
-    if files[9] in contofprof:
-        copyfiles.append(files[9])
-    #print(copyfiles)
-    input()
-    #print(files)
-    filelen = len(copyfiles)
-    filenumber = 0
-    print("Would you like to begin swapping the controller layouts? y/n")
-    if input(" > ") == "y":
-        for i in range(0, filelen):
-            print(filenumber)
-            os.rename(profdir + files[filenumber], profdir + files[filenumber] + endfileext)
-            filenumber = filenumber + 1
+    zipname = input("Save name: ") # asking for save name
+    newZip = zipfile.ZipFile(directory + "\\etscbu.backups\\" + zipname + ".etcs", "w") # creating the zip
+    
+    stage = 0
+    confgen.make(profdir, zipname, profilepath, version) #making the .conf file
+    copyfiles.append(".conf")
+    filelen2 = len(copyfiles)
+    for i in range(0, filelen2):
+        newZip.write(copyfiles[stage], compress_type=zipfile.ZIP_STORED)
+        stage = stage + 1
+    os.unlink(profdir + "\\.conf") # delete the old .conf
+    newZip.close() # finishing with the zip
+    print("Save successfully created!") # output final result
 
+# TODO swap load
+def swapload():
+	# reading all saves in backup dir
+	bulist = os.listdir(directory + "\\etscbu.backups\\")
+	print(directory + "\\etscbu.backups\\")
+	print(bulist)
+    # list saves by current profile (profile names need to be taken from .conf and turned from hex to a string, the printed)
+    # allow the loading of saves
+
+# TODO swap load -a
+    # list saves from ALL profiles
+    # allow the loading of saves
+
+# TODO update docs
+
+# cli like interface
 print()
-print("Please input command for the profile " + bytearray.fromhex(dirs[userin]).decode() + "?")
+print("Please input command for the profile " + bytearray.fromhex(dirs[userin]).decode() + ".")
 while True:
     userfunction = input(">> ")
 
-    if userfunction == "swap init":
-        swapinit()
+    if userfunction == "swap create":
+        swapcreate()
         continue
-    elif userfunction == "swap init -c":
-        swapinitc()
+    elif userfunction == "swap load":
+        swapload()
         continue
     elif userfunction == "swap":
-        swap()
+        print("Usage: \nswap create \n    Saves the current state of the controller layouts for that profile. \nswap load \n    Loads a controller save.")
         continue
-
+    # essential stuff
     elif userfunction == "exit":
         sys.exit()
-    
+    else:
+        print("Not a valid command!")
