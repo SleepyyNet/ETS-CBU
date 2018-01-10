@@ -29,11 +29,8 @@ print("under certain conditions; see LICENCE.txt for details.")
 print()
 print()
 
-<<<<<<< HEAD
 import os, shutil, sys, time, zipfile #, win32con, win32api # stock libraries
-=======
 import os, shutil, sys, time, zipfile, win32con, win32api # stock libraries
->>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
 import easygui # included libraries
 import confgen # custom libraries
 
@@ -83,11 +80,7 @@ def swapcreate():
 
     if os.path.exists(directory + "\\etscbu.backups") == False: # if it isn't aready there, make it and make it hidden
         os.makedirs(directory + "\\etscbu.backups")
-<<<<<<< HEAD
         #win32api.SetFileAttributes(directory + "\\etscbu.backups", win32con.FILE_ATTRIBUTE_HIDDEN)
-=======
-        win32api.SetFileAttributes(directory + "\\etscbu.backups", win32con.FILE_ATTRIBUTE_HIDDEN)
->>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
 
     zipname = input("Save name: ") # asking for save name
     newZip = zipfile.ZipFile(directory + "\\etscbu.backups\\" + zipname + ".etcs", "w") # creating the zip
@@ -104,14 +97,58 @@ def swapcreate():
     print("Save successfully created!") # output final result
 
 # TODO swap load
-<<<<<<< HEAD
+
 def swapload():
+    global directory
 	# reading all saves in backup dir
-	bulist = os.listdir(directory + "\\etscbu.backups\\")
-	print(directory + "\\etscbu.backups\\")
-	print(bulist)
-=======
->>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
+    bulist = os.listdir(directory + "\etscbu.backups\\")
+    print(directory + "\etscbu.backups\\")
+    print(bulist)
+    bulen = len(bulist)
+
+    if bulen == 0:
+        print("There are no saves available!")
+    elif bulen > 0:
+        stage = 0
+        ok = []
+        for i in range(0, bulen):
+            if bulist[stage].endswith(".etcs") == True:
+                ok.append(bulist[stage])
+            stage = stage + 1
+        print(ok)
+        
+        oklen = len(ok)
+        stage = 0
+        listnumberx = 1
+
+        print("Please choose a save.")
+        for i in range(0, oklen):
+            target = zipfile.ZipFile(directory + "etscbu.backups\\" + ok[stage])
+            target.extract(".conf")
+            targetconf = open(".conf", "r")
+            #lines = targetconf.readlines()
+            #targetline = lines[0]
+            listnumberx = str(listnumberx)
+            print(listnumberx + ": " + targetconf.readlines()[0][10:])
+            #listobj = ["placeholder to use up 0"]
+            targetconf.close()
+            os.unlink(".conf")
+            stage = stage + 1
+
+        print("Please input a number.")
+        userin = input(" > ")
+        userin = int(userin)
+        userin = userin - 1
+        chosensave = ok[userin]
+        loadsave = directory + "etscbu.backups\\" + chosensave
+        print(loadsave)
+
+        #extract .conf file
+        #read .conf file
+        #print save data
+        #delete conf file
+        #repeat until all are done
+
     # list saves by current profile (profile names need to be taken from .conf and turned from hex to a string, the printed)
     # allow the loading of saves
 
@@ -131,12 +168,8 @@ while True:
         swapcreate()
         continue
     elif userfunction == "swap load":
-<<<<<<< HEAD
         swapload()
-=======
-        print("This is not yet implemented!")
         #todo SWAP LOAD
->>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
         continue
     elif userfunction == "swap":
         print("Usage: \nswap create \n    Saves the current state of the controller layouts for that profile. \nswap load \n    Loads a controller save.")

@@ -78,14 +78,13 @@
     <Content Include="oldversions\0.0.1a\docs\build\html\searchindex.js" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="confgen - Copy.py" />
+    <Compile Include="confgen.py" />
     <Compile Include="docs\source\conf.py" />
     <Compile Include="easygui.py" />
     <Compile Include="ets-cbu.py" />
     <Compile Include="oldversions\0.0.1a\docs\source\conf.py" />
     <Compile Include="oldversions\0.0.1a\ets-cbu.py" />
     <Compile Include="pyperclip.py" />
-    <Compile Include="__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="docs\" />
