@@ -29,7 +29,11 @@ print("under certain conditions; see LICENCE.txt for details.")
 print()
 print()
 
+<<<<<<< HEAD
 import os, shutil, sys, time, zipfile #, win32con, win32api # stock libraries
+=======
+import os, shutil, sys, time, zipfile, win32con, win32api # stock libraries
+>>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
 import easygui # included libraries
 import confgen # custom libraries
 
@@ -79,7 +83,11 @@ def swapcreate():
 
     if os.path.exists(directory + "\\etscbu.backups") == False: # if it isn't aready there, make it and make it hidden
         os.makedirs(directory + "\\etscbu.backups")
+<<<<<<< HEAD
         #win32api.SetFileAttributes(directory + "\\etscbu.backups", win32con.FILE_ATTRIBUTE_HIDDEN)
+=======
+        win32api.SetFileAttributes(directory + "\\etscbu.backups", win32con.FILE_ATTRIBUTE_HIDDEN)
+>>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
 
     zipname = input("Save name: ") # asking for save name
     newZip = zipfile.ZipFile(directory + "\\etscbu.backups\\" + zipname + ".etcs", "w") # creating the zip
@@ -96,11 +104,14 @@ def swapcreate():
     print("Save successfully created!") # output final result
 
 # TODO swap load
+<<<<<<< HEAD
 def swapload():
 	# reading all saves in backup dir
 	bulist = os.listdir(directory + "\\etscbu.backups\\")
 	print(directory + "\\etscbu.backups\\")
 	print(bulist)
+=======
+>>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
     # list saves by current profile (profile names need to be taken from .conf and turned from hex to a string, the printed)
     # allow the loading of saves
 
@@ -120,7 +131,12 @@ while True:
         swapcreate()
         continue
     elif userfunction == "swap load":
+<<<<<<< HEAD
         swapload()
+=======
+        print("This is not yet implemented!")
+        #todo SWAP LOAD
+>>>>>>> b9f8621d832a372e3ac6bbc65ca2966040767176
         continue
     elif userfunction == "swap":
         print("Usage: \nswap create \n    Saves the current state of the controller layouts for that profile. \nswap load \n    Loads a controller save.")
