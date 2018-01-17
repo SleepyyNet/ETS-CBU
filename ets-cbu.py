@@ -29,7 +29,6 @@ print("under certain conditions; see LICENCE.txt for details.")
 print()
 print()
 
-import os, shutil, sys, time, zipfile #, win32con, win32api # stock libraries
 import os, shutil, sys, time, zipfile, win32con, win32api # stock libraries
 import easygui # included libraries
 import confgen # custom libraries
@@ -99,7 +98,7 @@ def swapcreate():
 # TODO swap load
 
 def swapload():
-    global directory
+    global directory, profdir
 	# reading all saves in backup dir
     bulist = os.listdir(directory + "\etscbu.backups\\")
     print(directory + "\etscbu.backups\\")
@@ -128,12 +127,14 @@ def swapload():
             targetconf = open(".conf", "r")
             #lines = targetconf.readlines()
             #targetline = lines[0]
-            listnumberx = str(listnumberx)
-            print(listnumberx + ": " + targetconf.readlines()[0][10:])
+            listnumberxstr = str(listnumberx)
+            savename = targetconf.readlines()[0][9:].rstrip("\n")
+            print(listnumberxstr + ": " + savename)
             #listobj = ["placeholder to use up 0"]
             targetconf.close()
             os.unlink(".conf")
             stage = stage + 1
+            listnumberx = listnumberx + 1
 
         print("Please input a number.")
         userin = input(" > ")
@@ -141,7 +142,14 @@ def swapload():
         userin = userin - 1
         chosensave = ok[userin]
         loadsave = directory + "etscbu.backups\\" + chosensave
-        print(loadsave)
+        extractref = zipfile.ZipFile(loadsave, 'r')
+        extractref.extractall(profdir)
+        extractref.close()
+        os.unlink(profdir + "\\.conf") # delete the old .conf
+        userin = input("Would you like to delete the save? y/n")
+        if userin == "y":
+            os.unlink(loadsave)
+        ## TEST
 
         #extract .conf file
         #read .conf file
