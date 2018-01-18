@@ -10,9 +10,7 @@ A guide to the basic functions of this script can be found in the quickstart sec
 
 **Important notes**
 
-Currently, this will not work with American Truck Simulator
-
-Currently, the method of accessing the profiles is setup only for Windows 8 and 10. Support for Windows 7 is coming soon. Ish.
+Currently, this will not work with American Truck Simulator. This will come soon. Hang tight.
 
 Guide
 ^^^^^
@@ -21,8 +19,7 @@ Guide
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
-	
-   requirements
+   
    quickstart
    commands
    licence

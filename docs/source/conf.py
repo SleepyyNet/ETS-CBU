@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'ETS-CBU'
-copyright = '2017, codemicro'
+copyright = '2018, codemicro'
 author = 'codemicro'
 
 # The version info for the project you're documenting, acts as replacement for
