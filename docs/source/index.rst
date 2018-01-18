@@ -1,8 +1,8 @@
 ETS-CBU documentation
 =====================
 
-At present, the tool is under heavy development and should not be used as it may contain major bugs.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+At present, the tool is under heavy development and caution should be taken as it may contain bugs.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ETS-CBU is a tool designed to manage ETS2 controller layouts. It has the ability to swap two different sets of controller configs, backup controller configs into .zip files and synchronise layouts between profiles with the press of a button.
 
