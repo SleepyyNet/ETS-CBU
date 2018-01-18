@@ -15,9 +15,6 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-    If you wish to contact me concerning this program, drop me a line at:
-        thomasdpain@gmail.com
-    and I'll do my best to respond in a timely manner.
 '''
 
 version = "0.0a"
@@ -29,13 +26,14 @@ print("under certain conditions; see LICENCE.txt for details.")
 print()
 print()
 
-import os, shutil, sys, time, zipfile, win32con, win32api # stock libraries
+import os, shutil, sys, time, zipfile # stock libraries
 import easygui # included libraries
 import confgen # custom libraries
 
 # gathering required data
 
 print("Please locate your ETS2 folder.")
+time.sleep(2)
 directory = easygui.diropenbox() + "\\"
 print(directory)
 
@@ -79,7 +77,6 @@ def swapcreate():
 
     if os.path.exists(directory + "\\etscbu.backups") == False: # if it isn't aready there, make it and make it hidden
         os.makedirs(directory + "\\etscbu.backups")
-        #win32api.SetFileAttributes(directory + "\\etscbu.backups", win32con.FILE_ATTRIBUTE_HIDDEN)
 
     zipname = input("Save name: ") # asking for save name
     newZip = zipfile.ZipFile(directory + "\\etscbu.backups\\" + zipname + ".etcs", "w") # creating the zip
@@ -146,23 +143,6 @@ def swapload():
         extractref.extractall(profdir)
         extractref.close()
         os.unlink(profdir + "\\.conf") # delete the old .conf
-        userin = input("Would you like to delete the save? y/n")
-        if userin == "y":
-            os.unlink(loadsave)
-        ## TEST
-
-        #extract .conf file
-        #read .conf file
-        #print save data
-        #delete conf file
-        #repeat until all are done
-
-    # list saves by current profile (profile names need to be taken from .conf and turned from hex to a string, the printed)
-    # allow the loading of saves
-
-# TODO swap load -a
-    # list saves from ALL profiles
-    # allow the loading of saves
 
 # TODO update docs
 
