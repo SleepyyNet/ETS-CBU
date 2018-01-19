@@ -143,8 +143,7 @@ def swapload():
         extractref.extractall(profdir)
         extractref.close()
         os.unlink(profdir + "\\.conf") # delete the old .conf
-
-# TODO update docs
+	print("Successfully restored from save " + chosensave)
 
 # cli like interface
 print()
