@@ -10,7 +10,7 @@ After that, you will be presented with a command line style interface. At presen
 At present, there are only three functions built into the script. They are:
 
 * Swap
-   * This will swap two sets of controller layouts. Simple.
+   * This provides the ability to create and load saves of controller layouts to any profile.
 * Backup
    * This will save the controller layouts to a .zip file, so you can do something with it and store it away somewhere. This feature is not availavle in version 0.0.1 alpha.
 * Sync
@@ -24,3 +24,9 @@ To create a backup that can be used with any profile, type
    swap create
 
 And follow the onscreen instructions.
+
+If you want to load the saves you made of the controller layouts, you can run
+::
+   swap load
+   
+This will list all the available saves found in the folder that is created by the program in your ETS2 folder. You can then choose a save to load, and once you select it, the program will load it for you.
