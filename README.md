@@ -2,7 +2,7 @@
 **Known as ETS-CBU for short**,
 this is a Python script that will create backups of controller layouts, synchronise controller layouts between profiles and swap between different layouts in the same profiles.
 
-[Link to documentation](ets-cbu.readthedocs.io)
+[Link to documentation](http://ets-cbu.readthedocs.io)
 
 ## Requirements
 The requirements to run this project are:
