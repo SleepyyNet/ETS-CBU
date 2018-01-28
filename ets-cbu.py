@@ -75,10 +75,16 @@ def swapcreate():
             copyfiles.append(files[stage])
             stage = stage + 1
 
-    if os.path.exists(directory + "\\etscbu.backups") == False: # if it isn't aready there, make it and make it hidden
+    if os.path.exists(directory + "\\etscbu.backups") == False: # if the directory is not there, make it be there
         os.makedirs(directory + "\\etscbu.backups")
 
     zipname = input("Save name: ") # asking for save name
+    bulist = os.listdir(directory + "\etscbu.backups\\")
+    if zipname + ".etcs" in bulist:
+        print("There is already a save created with that name!")
+        userin = input(" Would you like to overwrite it? y/n: ")
+        if userin == "n":
+            swapcreate()
     newZip = zipfile.ZipFile(directory + "\\etscbu.backups\\" + zipname + ".etcs", "w") # creating the zip
     
     stage = 0
@@ -98,8 +104,7 @@ def swapload():
     global directory, profdir
 	# reading all saves in backup dir
     bulist = os.listdir(directory + "\etscbu.backups\\")
-    print(directory + "\etscbu.backups\\")
-    print(bulist)
+    # print(directory + "\etscbu.backups\\")
     bulen = len(bulist)
 
     if bulen == 0:
@@ -111,7 +116,6 @@ def swapload():
             if bulist[stage].endswith(".etcs") == True:
                 ok.append(bulist[stage])
             stage = stage + 1
-        print(ok)
         
         oklen = len(ok)
         stage = 0
@@ -137,14 +141,16 @@ def swapload():
         userin = input(" > ")
         userin = int(userin)
         userin = userin - 1
+        if userin > oklen:
+            print("That is not a valid selection!")
+            swapload()
         chosensave = ok[userin]
         loadsave = directory + "etscbu.backups\\" + chosensave
         extractref = zipfile.ZipFile(loadsave, 'r')
         extractref.extractall(profdir)
         extractref.close()
         os.unlink(profdir + "\\.conf") # delete the old .conf
-
-# TODO update docs
+        #print("Save successfully loaded!")
 
 # cli like interface
 print()
